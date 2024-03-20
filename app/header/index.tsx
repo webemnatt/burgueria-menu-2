@@ -56,7 +56,7 @@ const Header:React.FC<HeaderProps> = ({ headerList, mobileList }) => {
         onClick={toggleMenu}
       >
         <nav
-          className="flex flex-col min-h-screen items-center py-8"
+          className="flex flex-col min-h-screen items-center py-8 md:hidden"
           aria-label="mobile"
         >
           {mobileList.map((item: any) => (

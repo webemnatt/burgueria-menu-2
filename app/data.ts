@@ -1,3 +1,21 @@
+export const restaurantData = {
+  logo: 'hamb-1.svg',
+  name: 'Burgueria',
+  address: 'Rua Toda Sorte do Mundo, 100, Cidade Boa, Estado Bom',
+}
+
+const openAt: number = 12;
+const closeAt: number = 22;
+export const labelText: string = `Seg a Dom - ${openAt}:00 às ${closeAt}:00`;
+
+export const checkRestaurantIsOpen = (): boolean => {
+  const date = new Date(); // data atual
+  const hour = date.getHours(); // hora atual
+  return hour >= openAt && hour < closeAt;
+  // se retorna true (está dentro do intervalo, o restaurante está aberto)
+  // dentro do intervalo: aberto; fora: fechado
+};
+
 export const burgersMenu = [
   {
     id:'0',
@@ -94,21 +112,3 @@ export const mobileMenu = [
 ];
 
 export const headerMenu = mobileMenu.slice(1, 4);
-
-export const restaurantData = {
-  logo: 'hamb-1.svg',
-  name: 'Burgueria',
-  address: 'Rua Toda Sorte do Mundo, 100, Cidade Boa, Estado Bom',
-}
-
-const openAt: number = 12;
-const closeAt: number = 22;
-export const labelText: string = `Seg a Dom - ${openAt}:00 às ${closeAt}:00`;
-
-export const checkRestaurantIsOpen = (): boolean => {
-  const date = new Date(); // data atual
-  const hour = date.getHours(); // hora atual
-  return hour >= openAt && hour < closeAt;
-  // se retorna true (está dentro do intervalo, o restaurante está aberto)
-  // dentro do intervalo: aberto; fora: fechado
-};
