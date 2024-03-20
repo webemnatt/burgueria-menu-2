@@ -12,7 +12,7 @@ interface HeaderProps {
   mobileList: MenuItem[];
 }
 
-export default function Header({ headerList, mobileList }: HeaderProps) {
+const Header:React.FC<HeaderProps> = ({ headerList, mobileList }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -73,3 +73,5 @@ export default function Header({ headerList, mobileList }: HeaderProps) {
     </header>
   );
 }
+
+export default Header

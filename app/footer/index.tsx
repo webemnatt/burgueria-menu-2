@@ -1,7 +1,6 @@
-import Image from 'next/image';
 import { FaCartPlus } from 'react-icons/fa';
 
-export default function Footer() {
+const Footer:React.FC = () => {
   return (
     <footer
       id="footer"
@@ -17,3 +16,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export default Footer
