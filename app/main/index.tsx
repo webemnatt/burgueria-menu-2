@@ -1,4 +1,4 @@
-'use client';
+'use client'; // não remover!!
 import Hero from './hero';
 import Menu from './menu';
 import { restaurantData,labelText,checkRestaurantIsOpen,burgersMenu,drinksMenu } from '../data';

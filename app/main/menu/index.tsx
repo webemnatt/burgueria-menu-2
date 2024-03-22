@@ -7,7 +7,7 @@ import { useCart } from './viewmodel'
 import { checkRestaurantIsOpen } from '../../data'
 
 const Menu:React.FC<MenuProps> = ({burgersList,drinksList}) => {
-  const { addToCart, getCartItems, removeItem } = useCart()
+  const { addToCart, getCartItems, removeItem, clearCart } = useCart()
   cartItems = getCartItems()
 
   const [isOpen, setIsOpen] = useState<boolean>(false); //modal
@@ -34,6 +34,10 @@ const Menu:React.FC<MenuProps> = ({burgersList,drinksList}) => {
   const handleRemoveItem = (name: string) => {
     removeItem(name)
   }
+
+  const handleClearCart = () => {
+    clearCart()
+  }
   return (
     <>
       <section id='menu' className="p-10">
@@ -57,6 +61,7 @@ const Menu:React.FC<MenuProps> = ({burgersList,drinksList}) => {
           handleRemoveItem={handleRemoveItem}
           openCloseModal={openCloseModal}
           whiteModal={whiteModal}
+          handleClearCart={handleClearCart}
           />
       )}
     </>

@@ -1,10 +1,4 @@
-// 'use client';
 import { useEffect, useState } from 'react';
-
-interface StatusProps {
-  labelText: string;
-  status: () => boolean; // Adicionando a função como uma propriedade
-}
 
 const RestaurantStatus: React.FC<StatusProps> = ({ labelText, status }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -22,5 +16,10 @@ const RestaurantStatus: React.FC<StatusProps> = ({ labelText, status }) => {
     </div>
   );
 };
+
+interface StatusProps {
+  labelText: string;
+  status: () => boolean;
+}
 
 export default RestaurantStatus;

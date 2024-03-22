@@ -1,17 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 
-interface MenuItem {
-  id: string;
-  name: string;
-  href: string;
-}
-
-interface HeaderProps {
-  headerList: MenuItem[];
-  mobileList: MenuItem[];
-}
-
 const Header:React.FC<HeaderProps> = ({ headerList, mobileList }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -72,6 +61,17 @@ const Header:React.FC<HeaderProps> = ({ headerList, mobileList }) => {
       </section>
     </header>
   );
+}
+
+interface MenuItem {
+  id: string;
+  name: string;
+  href: string;
+}
+
+interface HeaderProps {
+  headerList: MenuItem[];
+  mobileList: MenuItem[];
 }
 
 export default Header

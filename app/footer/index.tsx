@@ -1,4 +1,3 @@
-'use client';
 import { FaCartPlus } from 'react-icons/fa';
 
 const Footer: React.FC<FooterProps> = ({ cartItems, openCloseModal }) => {
@@ -18,10 +17,8 @@ const Footer: React.FC<FooterProps> = ({ cartItems, openCloseModal }) => {
           total += item.quantity
           return null
         })}
-        (<span id="cart-count">{total}</span>) Veja seu carrinho
-        <FaCartPlus className="text-lg text-white" />
+        (<span id="cart-count">{total}</span>) Veja seu carrinho <FaCartPlus className="text-lg text-white" />
       </button>
-
     </footer>
   );
 }

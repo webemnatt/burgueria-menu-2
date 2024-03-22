@@ -1,7 +1,42 @@
+'use client';
+import React, { useState } from 'react';
 import { cartItems } from '../main/menu';
+import { phone } from '../data'
 
-const CartModal: React.FC<CartModalProps> = ({ isOpen, whiteModal, openCloseModal, handleRemoveItem }) => {
+const CartModal: React.FC<CartModalProps> = ({ 
+  isOpen, 
+  whiteModal, 
+  openCloseModal, 
+  handleRemoveItem, 
+  handleClearCart 
+}) => {
   let total = 0
+  const [address, setAddress] = useState<string>('');
+  const [addressWarningVisible, setAddressWarningVisible] = useState<boolean>(false);
+
+  const handleAddressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAddress(event.target.value);
+    setAddressWarningVisible(false); // Oculta a mensagem de aviso ao digitar
+  };
+
+  const handleCheckout = () => {
+    if (address.trim() === '') {
+      setAddressWarningVisible(true); // Mostra a mensagem de aviso se o endereço estiver vazio
+      return;
+    }
+    const userCart = cartItems.map((item) => (
+      `${item.name}  preço: ${item.price} Quantidade: ${item.quantity} Total: ${(item.price * item.quantity).toFixed(2).replace(".", ",")}`
+    )).join("");
+
+    const message = encodeURIComponent(userCart + ` Endereço: ${address}`);
+
+    window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+
+    //chamando as funções para limpar após finalizar o pedido
+    setAddress(''); // limpa o input
+    openCloseModal(); // fecha o modal
+    handleClearCart(); // limpa o carrinho
+  };
 
   return (
     <div
@@ -11,18 +46,22 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, whiteModal, openCloseModa
       }`}
       onClick={whiteModal}
     >
-      <div className="bg-white p-6 rounded-md min-w-90%] md:min-w-[600px]">
+      <div className="bg-white p-6 rounded-md min-w-[0%] md:min-w-[600px] max-h-full overflow-y-auto">
         <h2 className="text-center font-bold text-2xl mb-3">Meu Carrinho</h2>
         <div id="cart-item" className="flex justify-between mb-2 flex-col">
         <ul> 
           {cartItems.map((item, index) => (
             <li key={index} className="grid grid-cols-1 md:grid-cols-3 mb-2">
-              <span className="flex font-bold">{item.name}</span>
-              <span className="flex ml-auto">
+              <span className="flex font-bold items-center">{item.name}</span>
+              <span className="flex ml-auto items-center">
                 {`R$ ${(item.price*item.quantity).toFixed(2).replace(".",",")}`}
               </span>
-              <span className="flex ml-auto">{`Qtde (${item.quantity})`}
-                <button className="flex ml-4" onClick={()=>handleRemoveItem(item.name)}>
+              <span className="flex ml-auto items-center">{`Qtde (${item.quantity})`}
+                <button 
+                className="flex ml-4 border-2 border-rose-50 hover:border-rose-600 rounded-lg p-0.5 " 
+                onClick={()=>handleRemoveItem(item.name)}
+                aria-label="Botão de reduzir a quantidade do item de um em um."
+                >
                   Remover
                 </button>
               </span>
@@ -41,11 +80,25 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, whiteModal, openCloseModa
           </p>
         </div>
         <p className="font-bold mt-4">Endereço de entrega:</p>
-        <input type="text" placeholder="Digite seu endereço completo" id="address" className="w-full border-2 p-1 rounded my-1" />
-        <p id="address-warn" className="text-red-500 hidden">Digite seu endereço completo!</p>
-        <div className="flex items-center justify-between mt-5 w-full">
-          <button id="close-cart-modal-btn" type="button" onClick={openCloseModal}>Fechar</button>
-          <button id="checkout-btn" className="bg-green-500 text-white px-4 py-1 rounded">Finalizar pedido</button>
+        <div>
+          <input
+            type="text"
+            placeholder="Digite seu endereço completo"
+            className={`w-full border-2 p-1 rounded my-1 ${addressWarningVisible ? "border-red-500" : ""}`}
+            value={address}
+            onChange={handleAddressChange}
+          />
+          {addressWarningVisible && <p className="text-red-500">Digite seu endereço completo!</p>}
+          <div className="flex items-center justify-between mt-5 w-full">
+            <button id="close-cart-modal-btn" type="button" onClick={openCloseModal}>Fechar</button>
+            <button
+             id="checkout-btn" 
+             onClick={handleCheckout} 
+             className="bg-green-500 text-white px-4 py-1 rounded" 
+             disabled={!(cartItems.length>0)}
+             >
+              Finalizar pedido</button>
+          </div>
         </div>
       </div>
     </div>
@@ -57,6 +110,7 @@ interface CartModalProps {
   whiteModal: (event: React.MouseEvent<HTMLDivElement>) => void;
   openCloseModal: () => void;
   handleRemoveItem: (name: string) => void;
+  handleClearCart: () => void;
 }
 
 export default CartModal;

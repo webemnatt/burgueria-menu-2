@@ -38,7 +38,11 @@ export const useCart = () => {
     return cartItems;
   };
 
-  return { addToCart, getCartItems, removeItem };
+  const clearCart = () => {
+    return setCartItems([]);
+  };
+
+  return { addToCart, getCartItems, removeItem, clearCart };
 };
 
 interface CartItem {

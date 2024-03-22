@@ -1,18 +1,5 @@
-// 'use client';
 import Image from 'next/image';
 import RestaurantStatus from './restaurantStatus'
-
-interface RestaurantData {
-  logo: string;
-  name: string;
-  address: string;
-}
-
-interface HeroProps {
-  restaurantData: RestaurantData;
-  labelText: string;
-  status: () => boolean; // Adicionando a função como uma propriedade
-}
 
 const Hero: React.FC<HeroProps> = ({restaurantData,labelText,status}) => {
   return (
@@ -35,9 +22,20 @@ const Hero: React.FC<HeroProps> = ({restaurantData,labelText,status}) => {
         </p>
         <RestaurantStatus labelText={labelText} status={status}/>
       </div>
-
     </section>
   );
+}
+
+interface RestaurantData {
+  logo: string;
+  name: string;
+  address: string;
+}
+
+interface HeroProps {
+  restaurantData: RestaurantData;
+  labelText: string;
+  status: () => boolean;
 }
 
 export default Hero;

@@ -3,7 +3,7 @@ export const restaurantData = {
   name: 'Burgueria',
   address: 'Rua Toda Sorte do Mundo, 100, Cidade Boa, Estado Bom',
 }
-
+export const phone = "2140044004"
 const openAt: number = 7;
 const closeAt: number = 22;
 export const labelText: string = `Seg a Dom - ${openAt}:00 às ${closeAt}:00`;
