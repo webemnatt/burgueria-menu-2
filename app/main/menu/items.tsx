@@ -1,28 +1,8 @@
 import Image from 'next/image';
 import { FaCartPlus } from 'react-icons/fa';
 
-interface CartItem {
-  name: string;
-  price: number;
-}
-
-interface MenuItem {
-  id: string;
-  name: string;
-  src: string;
-  description: string;
-  price: number;
-}
-
-interface ItemsProps {
-  itemList: MenuItem[];
-  id: string;
-  gridRows: number;
-  onAddToCart: (name: string, price: number) => void; // Modificação aqui
-}
-
 const Items: React.FC<ItemsProps> = ({ itemList, id, gridRows, onAddToCart }) => {
-  const handleAddToCart = (name: string, price: number) => { // Modificação aqui
+  const handleAddToCart = (name: string, price: number) => {
     onAddToCart(name,price);
   };
 
@@ -47,7 +27,7 @@ const Items: React.FC<ItemsProps> = ({ itemList, id, gridRows, onAddToCart }) =>
                 className="bg-gray-900 px-5 py-1 rounded add-to-cart-btn leading-5"
                 data-name={item.name}
                 data-price={item.price}
-                onClick={() => handleAddToCart(item.name, item.price )} // Modificação aqui
+                onClick={() => handleAddToCart(item.name, item.price )}
               >
                 <FaCartPlus className="text-lg text-white" />
               </button>
@@ -57,6 +37,21 @@ const Items: React.FC<ItemsProps> = ({ itemList, id, gridRows, onAddToCart }) =>
       ))}
     </div>
   );
+}
+
+interface MenuItem {
+  id: string;
+  name: string;
+  src: string;
+  description: string;
+  price: number;
+}
+
+interface ItemsProps {
+  itemList: MenuItem[];
+  id: string;
+  gridRows: number;
+  onAddToCart: (name: string, price: number) => void;
 }
 
 export default Items;
