@@ -30,7 +30,7 @@ const Hero: React.FC<HeroProps> = ({restaurantData,labelText,status}) => {
         priority
       />
         <h1 className="text-3xl text-white mt-4 mb-2 font-bold">{restaurantData.name}</h1>
-        <p className="text-sm text-white">
+        <p className="text-sm text-white text-center">
           {restaurantData.address}
         </p>
         <RestaurantStatus labelText={labelText} status={status}/>

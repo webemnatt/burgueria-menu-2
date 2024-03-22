@@ -29,7 +29,7 @@ const Items: React.FC<ItemsProps> = ({ itemList, id, gridRows, onAddToCart }) =>
   return (
     <div id={id} className={`grid grid-cols-1 md:grid-cols-2 grid-rows-${gridRows} gap-7 md:gap-10 mx-auto max-w-7xl px-2 mb-16`}>
       {itemList.map((item) => (
-        <div key={item.id} className="flex gap-2">
+        <div key={item.id} className="flex gap-2 items-center">
           <Image
             alt={item.name}
             className="w-28 h-28 rounded-md hover:scale-110 hover:-rotate-2 duration-300"
@@ -42,7 +42,7 @@ const Items: React.FC<ItemsProps> = ({ itemList, id, gridRows, onAddToCart }) =>
             <p className="font-bold text-xl">{item.name}</p>
             <p className="text-sm my-2">{item.description}</p>
             <div className="flex items-center gap-2 justify-between">
-              <p className="font-bold text-2xl">R$ {(item.price).toFixed(2)}</p>
+              <p className="font-bold text-xl">R$ {(item.price).toFixed(2).replace(".",",")}</p>
               <button
                 className="bg-gray-900 px-5 py-1 rounded add-to-cart-btn leading-5"
                 data-name={item.name}

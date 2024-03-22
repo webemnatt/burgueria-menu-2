@@ -1,10 +1,15 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { FaCartPlus } from 'react-icons/fa';
-import CartModal from './cartModal'; // Importando o componente CartModal
+import CartModal from './cartModal';
 import { checkRestaurantIsOpen } from '../data'
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  cartItems:any[];
+}
+
+//componente footer com contador de itens do carrinho
+const Footer: React.FC<FooterProps> = ({cartItems}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false); //modal
   const [restaurantIsOpen, setRestaurantIsOpen] = useState<boolean>(false); //aberto ao público
 
@@ -23,23 +28,28 @@ const Footer: React.FC = () => {
     }
   }
 
+  let total = 0;
+
   return (
     <footer
       id="footer"
       className="w-full bg-red-900 py-3 fixed bottom-0 z-40 flex items-center justify-center"
     >
-          <button
-          id="cart-btn"
-          className={`flex items-center gap-2 text-white font-bold text-lg`}
-          onClick={openCloseModal} // Chama a função para abrir ou fechar o modal
-        >
-          (<span id="cart-count">0</span>) Veja seu carrinho
-          <FaCartPlus className="text-lg text-white" />
-        </button>
+      <button
+        id="cart-btn"
+        className={`flex items-center gap-2 text-white font-bold text-lg`}
+        onClick={openCloseModal} // Chama a função para abrir ou fechar o modal
+      >
+        {cartItems.map(item => {// incrementa quantidade ao contador
+          total += item.quantity
+          return null
+        })}
+        (<span id="cart-count">{total}</span>) Veja seu carrinho
+        <FaCartPlus className="text-lg text-white" />
+      </button>
       {restaurantIsOpen && ( // somente em horário comercial o modal é exibido se clicado no botão acima
         <CartModal isOpen={isOpen} whiteModal={whiteModal} openCloseModal={openCloseModal}/>
       )}
-
     </footer>
   );
 }

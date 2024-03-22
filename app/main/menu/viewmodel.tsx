@@ -32,6 +32,7 @@ export const useCart = () => {
   };
 
   //exporta a lista do que foi adicionado ao carrinho
+  //funciona apenas quando é usado o addToCart junto!!!
   const getCartItems = () => {
     return cartItems;
   };

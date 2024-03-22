@@ -1,6 +1,5 @@
 import Header from './header/index';
 import Main from './main/index';
-import Footer from './footer/index';
 import { mobileMenu, headerMenu } from './data';
 
 export default function Home() {
@@ -8,7 +7,6 @@ export default function Home() {
     <>
       <Header headerList={headerMenu} mobileList={mobileMenu} />
       <Main />
-      <Footer />
     </>
   );
 }

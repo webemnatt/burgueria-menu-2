@@ -18,7 +18,7 @@ const RestaurantStatus: React.FC<StatusProps> = ({ labelText, status }) => {
       <span className="font-bold text-white text-center">
         {isOpen ? 'Aberto' : 'Fechado'}
       </span>
-      <span className="text-white text-base">{labelText}</span>
+      <span className="text-white text-base whitespace-nowrap">{labelText}</span>
     </div>
   );
 };
