@@ -24,11 +24,15 @@ const CartModal: React.FC<CartModalProps> = ({
       setAddressWarningVisible(true); // Mostra a mensagem de aviso se o endereço estiver vazio
       return;
     }
-    const userCart = cartItems.map((item) => (
-      `${item.name}  preço: ${item.price} Quantidade: ${item.quantity} Total: ${(item.price * item.quantity).toFixed(2).replace(".", ",")}`
-    )).join("");
+    let total = 0
+    const itemInfo = cartItems.map((item) => {
+      total += (item.price * item.quantity)
+      return(
+      ` ${item.name} Quantidade: ${item.quantity}; `
+    )}).join("");
 
-    const message = encodeURIComponent(userCart + ` Endereço: ${address}`);
+    const useCart = `${itemInfo} Total do pedido: R$ ${total.toFixed(2).replace(".", ",")}.`;
+    const message = encodeURIComponent(useCart + ` Endereço: ${address}`);
 
     window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
 
@@ -46,16 +50,16 @@ const CartModal: React.FC<CartModalProps> = ({
       }`}
       onClick={whiteModal}
     >
-      <div className="bg-white p-6 rounded-md min-w-[0%] md:min-w-[600px] max-h-full overflow-y-auto">
+      <div className="bg-white p-6 rounded-md min-w-[80%] md:min-w-[300px] max-h-full overflow-y-auto">
         <h2 className="text-center font-bold text-2xl mb-3">Meu Carrinho</h2>
         <div id="cart-item" className="flex justify-between mb-2 flex-col">
         <ul> 
           {cartItems.map((item, index) => (
-            <li key={index} className="grid grid-cols-1 md:grid-cols-3 mb-2">
-              <span className="flex font-bold items-center">{item.name}</span>
-              <span className="flex ml-auto items-center">
-                {`R$ ${(item.price*item.quantity).toFixed(2).replace(".",",")}`}
-              </span>
+            <li key={index} className="grid grid-cols-1 md:grid-cols-2 mb-4">
+              <div className="flex gap-2">
+                <span className="flex font-bold items-center">{item.name}</span>
+                <span className="flex ml-auto items-center">{`R$ ${(item.price*item.quantity).toFixed(2).replace(".",",")}`}</span>
+              </div>
               <span className="flex ml-auto items-center">{`Qtde (${item.quantity})`}
                 <button 
                 className="flex ml-4 border-2 border-rose-50 hover:border-rose-600 rounded-lg p-0.5 " 
@@ -88,8 +92,8 @@ const CartModal: React.FC<CartModalProps> = ({
             value={address}
             onChange={handleAddressChange}
           />
-          {addressWarningVisible && <p className="text-red-500">Digite seu endereço completo!</p>}
-          <div className="flex items-center justify-between mt-5 w-full">
+          {addressWarningVisible ? <p className="text-red-500">Digite seu endereço completo!</p> : <p className="h-[24px]"></p>}
+          <div className="flex items-center justify-between mt-1 w-full">
             <button id="close-cart-modal-btn" type="button" onClick={openCloseModal}>Fechar</button>
             <button
              id="checkout-btn" 

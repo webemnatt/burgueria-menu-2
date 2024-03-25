@@ -6,7 +6,7 @@ const Footer: React.FC<FooterProps> = ({ cartItems, openCloseModal }) => {
   return (
     <footer
       id="footer"
-      className="w-full bg-red-900 py-3 fixed bottom-0 z-40 flex items-center justify-center z-0"
+      className="w-full bg-red-900 py-3 fixed bottom-0 z-0 flex items-center justify-center z-0"
     >
       <button
         id="cart-btn"

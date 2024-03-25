@@ -40,30 +40,34 @@ const Menu:React.FC<MenuProps> = ({burgersList,drinksList}) => {
   }
   return (
     <>
-      <section id='menu' className="p-10">
+      <section id='menu' className="sm:p-2 md:p-15 lg:p-10 mb-16">
         <h2 className="text-center text-4xl p-6">Conheça nosso menu</h2>
         <Items 
         id='burgers' 
         itemList={burgersList} 
         gridRows={4} 
-        onAddToCart={handleAddToCart}/>
-        <h2 className="text-center text-4xl p-6">Bebidas</h2>
+        onAddToCart={handleAddToCart}
+        restaurantIsOpen={restaurantIsOpen}
+        />
+        <h2 className="text-center text-4xl p-6 mt-5">Bebidas</h2>
         <Items 
         id='drinks' 
         itemList={drinksList} 
         gridRows={2} 
-        onAddToCart={handleAddToCart}/>
+        onAddToCart={handleAddToCart}
+        restaurantIsOpen={restaurantIsOpen}
+        />
       </section>
-      <Footer cartItems={cartItems} openCloseModal={openCloseModal}/>
       {restaurantIsOpen && (
-          <CartModal
-          isOpen={isOpen}
-          handleRemoveItem={handleRemoveItem}
-          openCloseModal={openCloseModal}
-          whiteModal={whiteModal}
-          handleClearCart={handleClearCart}
-          />
+        <Footer cartItems={cartItems} openCloseModal={openCloseModal}/>
       )}
+      <CartModal
+      isOpen={isOpen}
+      handleRemoveItem={handleRemoveItem}
+      openCloseModal={openCloseModal}
+      whiteModal={whiteModal}
+      handleClearCart={handleClearCart}
+      />
     </>
   );
 }
